@@ -85,6 +85,7 @@ header {
   background-color: #ffffff;
   border: 2px solid #8a8a8a;
   border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   z-index: 9999;
 }
 
@@ -146,26 +147,43 @@ dialog::backdrop {
 
 /* CSS para el control de escala */
 .leaflet-control-scale {
-  background-color: #ffffff; /* Fondo personalizado */
-  color: #2c3e50; /* Color del texto */
-  border: 2px solid #8a8a8a; /* Borde blanco */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 2px 5px; /* Espaciado interno */
-  font-size: 12px; /* Tamaño de texto */
+  background-color: #ffffff;
+  color: #2c3e50;
+  border: 2px solid #8a8a8a;
+  border-radius: 10px;
+  padding: 2px 5px;
+  font-size: 12px;
   font-weight: bold;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Personaliza la escala métrica */
 .leaflet-control-scale-line {
-  background-color: white; /* Fondo de la barra de escala */
-  color: #26323f; /* Color del texto */
-  border-radius: 2px; /* Bordes redondeados de la barra */
-  padding: 2px; /* Espaciado interno */
+  background-color: white;
+  color: #26323f;
+  border-radius: 2px;
+  padding: 2px;
 }
 
-/* Ajusta la posición si es necesario */
 .leaflet-bottom .leaflet-control-scale {
-  margin-bottom: 10px; /* Espaciado desde el borde inferior */
-  margin-right: 10px; /* Espaciado desde el borde derecho */
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+/* Estilo para la leyenda */
+.info.legend {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 18px;
+  color: #2c3e50;
+}
+
+.info.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
 }
