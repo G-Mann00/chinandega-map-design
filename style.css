@@ -107,6 +107,7 @@ dialog {
   max-width: 400px;
   background-color: white;
   font-size: 16px;
+  color: #26323f;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   animation: slide-down 0.4s ease-out; /* Animación al aparecer */
 }
@@ -141,4 +142,30 @@ dialog::backdrop {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* CSS para el control de escala */
+.leaflet-control-scale {
+  background-color: #ffffff; /* Fondo personalizado */
+  color: #2c3e50; /* Color del texto */
+  border: 2px solid #8a8a8a; /* Borde blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 2px 5px; /* Espaciado interno */
+  font-size: 12px; /* Tamaño de texto */
+  font-weight: bold;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+/* Personaliza la escala métrica */
+.leaflet-control-scale-line {
+  background-color: white; /* Fondo de la barra de escala */
+  color: #26323f; /* Color del texto */
+  border-radius: 2px; /* Bordes redondeados de la barra */
+  padding: 2px; /* Espaciado interno */
+}
+
+/* Ajusta la posición si es necesario */
+.leaflet-bottom .leaflet-control-scale {
+  margin-bottom: 10px; /* Espaciado desde el borde inferior */
+  margin-right: 10px; /* Espaciado desde el borde derecho */
 }

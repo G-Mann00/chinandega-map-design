@@ -13,6 +13,16 @@ function reubicar() {
   map.setView([12.6231, -87.1278], 9);
 }
 
+// Agregando el control de escala
+L.control
+  .scale({
+    imperial: false,
+    metric: true,
+    position: "bottomright",
+    maxWidth: 100,
+  })
+  .addTo(map);
+
 // Funcionalidad del Modal
 const btnInfo = document.getElementById("information-button");
 const modalInfo = document.getElementById("info-modal");
@@ -25,3 +35,19 @@ btnInfo.addEventListener("click", () => {
 btnCerrarModal.addEventListener("click", () => {
   modalInfo.close();
 });
+
+// Capa del Minimapa
+var miniMapLayer = L.tileLayer(
+  "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+    minZoom: 5,
+    maxZoom: 13,
+  }
+);
+
+// Agregando el minimapa al contenedor del mapa principal
+new L.Control.MiniMap(miniMapLayer, {
+  toggleDisplay: true,
+  minimized: false,
+  position: "bottomright",
+}).addTo(map);
