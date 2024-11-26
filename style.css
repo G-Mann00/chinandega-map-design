@@ -1,4 +1,144 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background-color: #2c3e50;
+  color: white;
+}
+
+#git-button {
+  background-color: #26323f;
+  height: 42px;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border 0.1s ease, background-color 0.1s ease;
+}
+#git-button:hover {
+  border: 2px solid #61da4b;
+  background-color: #34495e;
+  transition: border 0.1s ease, background-color 0.1s ease;
+}
+
+#github-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+}
+
 #map {
   display: flex;
-  height: 98vh;
+  height: 85.5vh;
+  position: relative;
+}
+
+#north-icon {
+  position: absolute;
+  top: 11px;
+  left: 40px;
+  width: 60px;
+  height: 60px;
+  z-index: 9999; /* Asegura que esté encima del mapa */
+}
+
+#relocation-button {
+  position: absolute;
+  cursor: pointer;
+  left: 10px;
+  top: 90px;
+  height: 40px;
+  width: 40px;
+  background-color: #ffffff;
+  border: 2px solid #8a8a8a;
+  border-radius: 10px;
+  z-index: 9999;
+}
+
+#relocation-button:hover {
+  background-color: #f4f4f4;
+}
+
+#location-mark {
+  width: 24px;
+  height: 24px;
+  margin-top: 5px;
+}
+
+#information-button {
+  position: absolute;
+  cursor: pointer;
+  left: 10px;
+  bottom: 15px;
+  height: 70px;
+  width: 70px;
+  background-color: #ffffff;
+  border: 2px solid #8a8a8a;
+  border-radius: 10px;
+  z-index: 9999;
+}
+
+#information-button:hover {
+  background-color: #f4f4f4;
+}
+
+#question-mark {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+/* CSS para el modal */
+dialog {
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  background-color: white;
+  font-size: 16px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  animation: slide-down 0.4s ease-out; /* Animación al aparecer */
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#close-modal {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #26323f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#close-modal:hover {
+  background-color: #34495e;
+}
+
+/* Animación personalizada del modal */
+@keyframes slide-down {
+  from {
+    /* Inicio: Invisible */
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    /* Fin: Visible y posicionado al centro */
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
