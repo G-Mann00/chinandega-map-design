@@ -61,19 +61,24 @@ var simbolosLayer = L.layerGroup();
 // Obteniendo color para las coropletas
 function getColor(total) {
   return total >= 117037
-    ? "#def5e5"
+    ? "#1D4F7B" // Azul marino oscuro
     : total >= 63625
-    ? "#4bc2ad"
+    ? "#3570A2" // Azul oscuro
     : total >= 20275
-    ? "#357ba3"
+    ? "#5F9CCF" // Azul medio
     : total >= 17177
-    ? "#3e2e8b"
-    : "#30275d"; // Para valores entre 0 y 7060
+    ? "#A2C8E4" // Azul intermedio
+    : "#D1E4F3"; // Azul claro
 }
 
 // Determinando el radio de cada simbolo según el valor de población total
 function getRadius(total) {
-  return Math.sqrt(total) * 0.2;
+  if (total >= 117037) return 35; // Aumentado de 25 a 35
+  if (total >= 63625) return 28; // Aumentado de 20 a 28
+  if (total >= 20275) return 22; // Aumentado de 15 a 22
+  if (total >= 17177) return 16; // Aumentado de 10 a 16
+  if (total >= 7061) return 10; // Aumentado de 5 a 10
+  return 6; // Aumentado de 3 a 6
 }
 
 // Estilo para las áreas (Coropletas)
@@ -91,7 +96,7 @@ function styleCoropletas(feature) {
 function styleProporcional(feature) {
   return {
     radius: getRadius(feature.properties.Total), // Calcula el tamaño del círculo
-    fillColor: "#ccdaed", // Color de relleno
+    fillColor: "#7BB9D3", // Color de relleno
     color: "#636363", // Color del borde
     weight: 1, // Grosor del borde
     opacity: 1, // Opacidad del borde
@@ -125,7 +130,7 @@ function highlightProportionalFeature(e) {
   var layer = e.target;
   layer.setStyle({
     weight: 3,
-    color: "#666",
+    color: "#4A8CB4",
     fillOpacity: 1,
   });
   layer.bringToFront();
@@ -135,7 +140,7 @@ function resetProportionalHighlight(e) {
   var layer = e.target;
   layer.setStyle({
     radius: getRadius(layer.feature.properties.Total), // Reaplicar el radio original
-    fillColor: "#ccdaed",
+    fillColor: "#7BB9D3",
     color: "#636363",
     weight: 1,
     opacity: 1,
@@ -201,20 +206,22 @@ var overlayLayers = {
 
 L.control.layers(baseLayers, overlayLayers).addTo(map);
 
-// Agregando la leyenda
-var legend = L.control({ position: "bottomright" });
+// Agregando la leyenda de Coropletas
+var legendCoropletas = L.control({ position: "bottomleft" });
 
-legend.onAdd = function (map) {
+legendCoropletas.onAdd = function (map) {
   var div = L.DomUtil.create("div", "info legend");
 
   // arreglo de objetos con los rangos y los colores correspondientes
   var ranges = [
-    { min: 0, max: 7060, color: "#30275d" },
-    { min: 7061, max: 17176, color: "#3e2e8b" },
-    { min: 17177, max: 20274, color: "#357ba3" },
-    { min: 20275, max: 63624, color: "#4bc2ad" },
-    { min: 63625, max: 117037, color: "#def5e5" },
+    { min: 0, max: 7060, color: "#D1E4F3" },
+    { min: 7061, max: 17176, color: "#A2C8E4" },
+    { min: 17177, max: 20274, color: "#5F9CCF" },
+    { min: 20275, max: 63624, color: "#3570A2" },
+    { min: 63625, max: 117037, color: "#1D4F7B" },
   ];
+
+  div.innerHTML += "<b>Población Total</b><br>";
 
   // Bucle para crear las etiquetas y colores de la leyenda
   for (var i = 0; i < ranges.length; i++) {
@@ -231,4 +238,37 @@ legend.onAdd = function (map) {
   return div;
 };
 
-legend.addTo(map);
+legendCoropletas.addTo(map);
+
+// Agregando la leyenda de simbolos proporcionales
+var legendProporcional = L.control({ position: "bottomleft" });
+
+legendProporcional.onAdd = function (map) {
+  var div = L.DomUtil.create("div", "info legend");
+  var ranges = [
+    { min: 0, max: 7060, radius: getRadius(7060) },
+    { min: 7061, max: 17176, radius: getRadius(17176) },
+    { min: 17177, max: 20274, radius: getRadius(20274) },
+    { min: 20275, max: 63624, radius: getRadius(63624) },
+    { min: 63625, max: 117037, radius: getRadius(117037) },
+  ];
+
+  div.innerHTML += "<b>Proporción de población</b><br>";
+  ranges.forEach(function (range) {
+    div.innerHTML += `<div style="display: flex; align-items: center; margin-bottom: 4px;">
+        <i style="
+          background: #7BB9D3;
+          width: ${range.radius * 2}px;
+          height: ${range.radius * 2}px;
+          border-radius: 50%;
+          margin-right: 8px;
+          display: inline-block;
+        "></i>
+        ${range.min} - ${range.max}
+      </div>`;
+  });
+
+  return div;
+};
+
+legendProporcional.addTo(map);

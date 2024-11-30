@@ -78,14 +78,13 @@ header {
 #information-button {
   position: absolute;
   cursor: pointer;
-  left: 10px;
-  bottom: 15px;
-  height: 70px;
-  width: 70px;
+  left: 65px;
+  top: 90px;
+  height: 40px;
+  width: 40px;
   background-color: #ffffff;
   border: 2px solid #8a8a8a;
   border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   z-index: 9999;
 }
 
@@ -94,9 +93,9 @@ header {
 }
 
 #question-mark {
-  width: 30px;
-  height: 30px;
-  margin: auto;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
 }
 
 /* CSS para el modal */
