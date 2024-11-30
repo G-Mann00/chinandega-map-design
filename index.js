@@ -52,8 +52,7 @@ new L.Control.MiniMap(miniMapLayer, {
   position: "bottomright",
 }).addTo(map);
 
-// -- Agregando GeoJSON de Chinandega (Coropletas) --
-// NOTA (26/11/24): NO ESTA APLICANDO BIEN LOS COLORES DE LA COROPLETA, REVISAR LOGICA DE RANGOS DE COLORES Y RESOLVER ERROR
+// -- Agregando GeoJSONs de Chinandega --
 // Definiendo variables para las capas
 var coropletasLayer = L.layerGroup();
 var simbolosLayer = L.layerGroup();
@@ -61,24 +60,24 @@ var simbolosLayer = L.layerGroup();
 // Obteniendo color para las coropletas
 function getColor(total) {
   return total >= 117037
-    ? "#1D4F7B" // Azul marino oscuro
+    ? "#1D4F7B"
     : total >= 63625
-    ? "#3570A2" // Azul oscuro
+    ? "#3570A2"
     : total >= 20275
-    ? "#5F9CCF" // Azul medio
+    ? "#5F9CCF"
     : total >= 17177
-    ? "#A2C8E4" // Azul intermedio
-    : "#D1E4F3"; // Azul claro
+    ? "#A2C8E4"
+    : "#D1E4F3";
 }
 
 // Determinando el radio de cada simbolo según el valor de población total
 function getRadius(total) {
-  if (total >= 117037) return 35; // Aumentado de 25 a 35
-  if (total >= 63625) return 28; // Aumentado de 20 a 28
-  if (total >= 20275) return 22; // Aumentado de 15 a 22
-  if (total >= 17177) return 16; // Aumentado de 10 a 16
-  if (total >= 7061) return 10; // Aumentado de 5 a 10
-  return 6; // Aumentado de 3 a 6
+  if (total >= 117037) return 35;
+  if (total >= 63625) return 28;
+  if (total >= 20275) return 22;
+  if (total >= 17177) return 16;
+  if (total >= 7061) return 10;
+  return 6;
 }
 
 // Estilo para las áreas (Coropletas)
@@ -96,11 +95,11 @@ function styleCoropletas(feature) {
 function styleProporcional(feature) {
   return {
     radius: getRadius(feature.properties.Total), // Calcula el tamaño del círculo
-    fillColor: "#7BB9D3", // Color de relleno
-    color: "#636363", // Color del borde
-    weight: 1, // Grosor del borde
-    opacity: 1, // Opacidad del borde
-    fillOpacity: 0.7, // Opacidad del relleno
+    fillColor: "#7BB9D3",
+    color: "#636363",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.7,
   };
 }
 
@@ -194,7 +193,7 @@ fetch("geojsons/chinandega-simbolos.geojson")
     console.error("Error al cargar el GeoJSON de centroides:", error)
   );
 
-// Agregando las coropletas al mapa por defecto
+// Agregando la capa de coropletas al mapa por defecto
 coropletasLayer.addTo(map);
 
 // Control de Capas
@@ -206,13 +205,14 @@ var overlayLayers = {
 
 L.control.layers(baseLayers, overlayLayers).addTo(map);
 
+// Definiendo leyendas para las capas
 // Agregando la leyenda de Coropletas
 var legendCoropletas = L.control({ position: "bottomleft" });
 
 legendCoropletas.onAdd = function (map) {
   var div = L.DomUtil.create("div", "info legend");
 
-  // arreglo de objetos con los rangos y los colores correspondientes
+  // Arreglo de objetos con los rangos y los colores correspondientes
   var ranges = [
     { min: 0, max: 7060, color: "#D1E4F3" },
     { min: 7061, max: 17176, color: "#A2C8E4" },
